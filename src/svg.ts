@@ -4,7 +4,6 @@ function svg(w: number, h: number){
     return $(document.createElementNS(ns, 'svg')).attr({
         width: w,
         height: h,
-
     });
 }
 
@@ -25,8 +24,8 @@ function line(x1: number, y1: number, x2: number, y2: number){
     });
 }
 
-function arc(x1: number, y1: number, rx: number, ry: number, sweep: number, x: number, y: number){
+function arc(r: number, x1: number, y1: number, x2: number, y2: number){
     return $(document.createElementNS(ns, 'path')).attr({
-        d: `M ${x1} ${y1} A ${rx} ${ry} 0 0 ${sweep} ${x} ${y}`,
+        d: `M ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2}`,
     });
 }

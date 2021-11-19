@@ -14,6 +14,8 @@ const option: Option = {
     accent: '#39c5bb',
 };
 
+//#region math
+
 const r = option.radius;
 const size = (option.stroke + r) * 2;
 const o = size / 2;
@@ -36,16 +38,17 @@ const fy = o - r * (sqrt5 + 1) / 4;
 const fx = o - r * Math.sqrt(10 - 2 * sqrt5) / 4;
 
 const g = o - r2;
+//#endregion math
 
 svg(size, size).append([
     circle(o, o, r).addClass('bound'), // O circle
     line(o, a, o, b), // x axis
     line(a, o, b, o), // y axis
-    arc(m, c, r, r, 0, m, d), // CD arc
+    arc(r, m, d, m, c), // CD arc
     line(m, c, m, d), // CD line
     line(o, a, m, o), // AM line
-    arc(o, o, r2, r2, 1, ex, ey), // OE arc
-    arc(ex, ey, AE, AE, 1, fx, fy), // EF arc
-    arc(o, o, r, r, 1, c, g), // OG arc
-    arc(c, g, r, r, 1, fx, fy).addClass([ 'bound', 'accent' ]), // FG arc
+    arc(r2, o, o, ex, ey), // OE arc
+    arc(AE, ex, ey, fx, fy), // EF arc
+    arc(r, o, o, c, g), // OG arc
+    arc(r, c, g, fx, fy).addClass([ 'bound', 'accent' ]), // FG arc
 ]).appendTo(document.body);
