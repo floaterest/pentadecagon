@@ -1,0 +1,22 @@
+@stroke: 10px;
+
+svg#pfp{
+	background-color: black;
+
+	& > *{
+		stroke: white;
+		stroke-width: @stroke;
+	}
+
+	path{
+		fill: none;
+	}
+
+	.bound{
+		stroke-width: calc(@stroke * 2);
+	}
+
+	.accent{
+		stroke: #39c5bb;
+	}
+}
