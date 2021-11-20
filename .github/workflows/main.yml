@@ -1,4 +1,4 @@
-name: Deploy Typescript static webpages
+name: Typescript & Less to static webpage
 
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
@@ -24,6 +24,11 @@ jobs:
         run: |
           npm i typescript -D
           npx tsc
+
+      - name: Compile Less
+        run: |
+          npm i less -D
+          npx lessc src/index.less public/index.css
 
       # https://github.com/tschaub/gh-pages#deploying-with-github-actions
       - name: Deploy with gh-pages
