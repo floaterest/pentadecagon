@@ -7,8 +7,8 @@ interface Option{
 }
 
 const option: Option = {
-    radius: 1000,
-    stroke: 20,
+    radius: 500,
+    stroke: 10,
     foreground: 'white',
     background: 'black',
     accent: '#39c5bb',
@@ -51,4 +51,4 @@ svg(size, size).append([
     arc(AE, ex, ey, fx, fy), // EF arc
     arc(r, o, o, c, g), // OG arc
     arc(r, c, g, fx, fy).addClass([ 'bound', 'accent' ]), // FG arc
-]).appendTo(document.body);
+]).attr('id', 'pfp').appendTo(document.body);
