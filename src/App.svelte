@@ -1,13 +1,9 @@
 <script lang="ts">
-	export let name: string;
+	import Complete from './Complete.svelte'
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>
-		Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn
-		how to build Svelte apps.
-	</p>
+	<Complete r={500} swidth={10} scolor="white" background="black" accent="#39c5bb"/>
 </main>
 
 <style lang="less">
