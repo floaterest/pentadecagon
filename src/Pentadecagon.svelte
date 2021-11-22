@@ -27,11 +27,20 @@
 
     $: g = o - r2;
 
+    $: rms = r - s;
+    $: rps = r + s;
+
     $: y1 = (sqrt5 + 1) / 2 * (r2 - s) - s * s / r;
-    $: x1 = Math.sqrt((r - s - y1) * (r - s + y1));
+    $: x1 = Math.sqrt((rms - y1) * (rms + y1));
 
     $: y2 = (r * (sqrt5 + 1) / 2 - (sqrt5 - 3) * s) / 2 - s * s / r;
-    $: x2 = Math.sqrt((r + s - y2) * (r + s + y2));
+    $: x2 = Math.sqrt((rps - y2) * (rps + y2));
+
+    $: y4 = r2;
+    $: x4 = Math.sqrt((rms + r2) * (r2 - s));
+
+    $: y3 = r2 + 2 * s * (1 - s / (4 * r));
+    $: x3 = Math.sqrt((rps - y3) * (rps + y3));
 </script>
 
 <svg width={size} height={size} fill="none" stroke-width={swidth} {stroke}
@@ -54,9 +63,8 @@
     <!-- OG arc -->
     <path d="M {o} {o} A {r} {r} 0 0 1 {c} {g}"></path>
     <!-- FG arc -->
-    <path stroke-width={swidth} stroke={accent} d="M {c} {g} A {r} {r} 0 0 1 {fx} {fy}"></path>
-
-    <path d="M {o-x1} {o-y1} A {AE} {AE} 0 0 1 {o-x2} {o-y2}" stroke="red" stroke-width="1"></path>
+    <path d="M {o-x1} {o-y1} A {AE+s} {AE+s} 0 0 1 {o-x2} {o-y2} A {rps} {rps} 0 0 0 {o-x3} {o-y3} A {rms} {rms} 0 0 1 {o-x4} {o-y4} A {rms} {rms} 0 0 1 {o-x1} {o-y1}"
+          fill={accent} stroke-width="0"></path>
 </svg>
 
 <style>
