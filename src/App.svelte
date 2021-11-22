@@ -1,9 +1,9 @@
 <script lang="ts">
-    import Complete from './Complete.svelte';
+    import Pentadecagon from './Pentadecagon.svelte';
 
     let option = {
-        radius: 500,
-        swidth: 5,
+        r: 500,
+        swidth: 20,
         stroke: 'white',
         accent: '#39c5bb',
         background: 'black',
@@ -12,8 +12,8 @@
 
 <main>
     <div>
-        <input type="number" bind:value={option.radius}>
+        <input type="number" bind:value={option.r}>
         <input type="number" bind:value={option.swidth}>
     </div>
-    <Complete {...option}/>
+    <Pentadecagon {...option}/>
 </main>
