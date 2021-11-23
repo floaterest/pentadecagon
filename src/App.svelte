@@ -3,8 +3,8 @@
 
     let option = {
         r: 500,
-        swidth: 20,
-        bwidth: 40,
+        swidth: 25,
+        cwidth: 50,
         stroke: 'white',
         accent: '#39c5bb',
         background: 'black',
@@ -15,7 +15,7 @@
     <div>
         <input type="number" bind:value={option.r}>
         <input type="number" bind:value={option.swidth}>
-        <input type="number" bind:value={option.bwidth}>
+        <input type="number" bind:value={option.cwidth}>
         <input type="text" bind:value={option.stroke}>
         <input type="text" bind:value={option.accent}>
         <input type="text" bind:value={option.background}>
