@@ -4,6 +4,7 @@
     let option = {
         r: 500,
         swidth: 20,
+        bwidth: 40,
         stroke: 'white',
         accent: '#39c5bb',
         background: 'black',

@@ -1,18 +1,19 @@
 <script lang="ts">
     export let r: number;
     export let swidth: number;
+    export let bwidth: number;
     export let stroke: string;
     export let accent: string;
     export let background: string;
-    $: s = swidth / 2;
-    $: size = (swidth + r) * 2;
+
+    $: size = bwidth + r * 2;
     $: o = size / 2;
     $: a = o - r;
-    $: b = o + r;
+    $: bb = o + r;
 
-    $: r2 = r / 2;
-    $: m = o + r2;
-    $: MC = r2 * Math.sqrt(3);
+    $: rhalf = r / 2;
+    $: m = o + rhalf;
+    $: MC = rhalf * Math.sqrt(3);
     $: c = o - MC;
     $: d = o + MC;
 
@@ -21,35 +22,47 @@
     $: ey = o - EN;
     $: ex = o + (r - EN) / 2;
 
-    $: AE = r2 * (sqrt5 - 1);
+    $: AE = rhalf * (sqrt5 - 1);
     $: fy = o - r * (sqrt5 + 1) / 4;
     $: fx = o - r * Math.sqrt(10 - 2 * sqrt5) / 4;
 
-    $: g = o - r2;
+    $: g = o - rhalf;
 
-    $: rms = r - s;
-    $: rps = r + s;
+    function x(rb: number, y: number){
+        return Math.sqrt((rb - y) * (rb + y));
+    }
 
-    $: y1 = (sqrt5 + 1) / 2 * (r2 - s) - s * s / r;
-    $: x1 = Math.sqrt((rms - y1) * (rms + y1));
+    $:p = (() => {
+        let s = swidth / 2;
+        let b = bwidth / 2;
+        let r2 = r + r;
 
-    $: y2 = (r * (sqrt5 + 1) / 2 - (sqrt5 - 3) * s) / 2 - s * s / r;
-    $: x2 = Math.sqrt((rps - y2) * (rps + y2));
+        let r1 = AE + s;
+        let y1 = r + (b - r1) * (b + r1) / r2 - b;
 
-    $: y4 = r2;
-    $: x4 = Math.sqrt((rms + r2) * (r2 - s));
+        // let y1 = (sqrt5 * (r2 - s) + r2 + s) / 2 + bs2r - b;
+        let y2 = y1 + bwidth;
 
-    $: y3 = r2 + 2 * s * (1 - s / (4 * r));
-    $: x3 = Math.sqrt((rps - y3) * (rps + y3));
+        let y3 = rhalf + (b - s) * (b + s) / r2 + s + b;
+        let y4 = y3 - bwidth;
+
+        return {
+            x1: o - x(r - b, y1), y1: o - y1, r1: r1,
+            x2: o - x(r + b, y2), y2: o - y2, r2: r + b,
+            x3: o - x(r + b, y3), y3: o - y3, r3: r - s,
+            x4: o - x(r - b, y4), y4: o - y4, r4: r - b,
+        };
+    })();
+
 </script>
 
 <svg width={size} height={size} fill="none" stroke-width={swidth} {stroke}
      style="background-color:{background};">
-    <circle stroke-width={swidth} cx={o} cy={o} r={r}></circle>
+    <circle stroke-width={bwidth} cx={o} cy={o} r={r}></circle>
     <!-- x axis -->
-    <line x1={o} y1={a} x2={o} y2={b}></line>
+    <line x1={o} y1={a} x2={o} y2={bb}></line>
     <!-- y axis -->
-    <line x1={a} y1={o} x2={b} y2={o}></line>
+    <line x1={a} y1={o} x2={bb} y2={o}></line>
     <!-- CD line -->
     <line x1={m} y1={c} x2={m} y2={d}></line>
     <!-- AM line -->
@@ -57,13 +70,13 @@
     <!-- CD arc -->
     <path d="M {m} {d} A {r} {r} 0 0 1 {m} {c}"></path>
     <!-- OE arc -->
-    <path d="M {o} {o} A {r2} {r2} 0 0 1 {ex} {ey}"></path>
+    <path d="M {o} {o} A {rhalf} {rhalf} 0 0 1 {ex} {ey}"></path>
     <!-- EF arc -->
     <path d="M {ex} {ey} A {AE} {AE} 0 0 1 {fx} {fy}"></path>
     <!-- OG arc -->
     <path d="M {o} {o} A {r} {r} 0 0 1 {c} {g}"></path>
     <!-- FG arc -->
-    <path d="M {o-x1} {o-y1} A {AE+s} {AE+s} 0 0 1 {o-x2} {o-y2} A {rps} {rps} 0 0 0 {o-x3} {o-y3} A {rms} {rms} 0 0 1 {o-x4} {o-y4} A {rms} {rms} 0 0 1 {o-x1} {o-y1}"
+    <path d="M {p.x1} {p.y1} A {p.r1} {p.r1} 0 0 1 {p.x2} {p.y2} A {p.r2} {p.r2} 0 0 0 {p.x3} {p.y3} A {p.r3} {p.r3} 0 0 1 {p.x4} {p.y4} A {p.r4} {p.r4} 0 0 1 {p.x1} {p.y1}"
           fill={accent} stroke-width="0"></path>
 </svg>
 
