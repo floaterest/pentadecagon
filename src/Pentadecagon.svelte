@@ -76,7 +76,7 @@
     <!-- OG arc -->
     <path d="M {o} {o} A {r} {r} 0 0 1 {c} {g}"></path>
     <!-- FG arc -->
-    <path d="M {p.x1} {p.y1} A {p.r1} {p.r1} 0 0 1 {p.x2} {p.y2} A {p.r2} {p.r2} 0 0 0 {p.x3} {p.y3} A {p.r3} {p.r3} 0 0 1 {p.x4} {p.y4} A {p.r4} {p.r4} 0 0 1 {p.x1} {p.y1}"
+    <path d="M {p.x1} {p.y1} A {p.r1} {p.r1} 0 0 1 {p.x2} {p.y2} A {p.r2} {p.r2} 0 0 0 {p.x3} {p.y3} A {p.r3} {p.r3} 0 0 0 {p.x4} {p.y4} A {p.r4} {p.r4} 0 0 1 {p.x1} {p.y1}"
           fill={accent} stroke-width="0"></path>
 </svg>
 
