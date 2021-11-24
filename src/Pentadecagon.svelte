@@ -65,7 +65,7 @@
 
 </script>
 
-<svg width={size} height={size} fill="none" stroke-width={swidth} {stroke}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {size} {size}" width={size} height={size} fill="none" stroke-width={swidth} {stroke}
      style="background-color:{background};">
     <circle stroke-width={cwidth} cx={o} cy={o} r={r}></circle>
     <!-- x axis -->
