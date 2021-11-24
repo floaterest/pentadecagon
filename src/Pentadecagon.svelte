@@ -88,6 +88,3 @@
     <path d="M {acc.x1} {acc.y1} A {acc.r1} {acc.r1} 0 0 1 {acc.x2} {acc.y2} A {acc.r2} {acc.r2} 0 0 0 {acc.x3} {acc.y3} A {acc.r3} {acc.r3} 0 0 0 {acc.x4} {acc.y4} A {acc.r4} {acc.r4} 0 0 1 {acc.x1} {acc.y1}"
           fill={accent} stroke-width="0"></path>
 </svg>
-
-<style>
-</style>
