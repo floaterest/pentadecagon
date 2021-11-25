@@ -10,11 +10,6 @@
         background: 'black',
     };
     let math = false;
-    $: (() => {
-        if(math){
-            option.swidth = option.cwidth = 1;
-        }
-    })();
 </script>
 
 <main>
@@ -27,5 +22,9 @@
         <input type="text" bind:value={option.background}>
         <input type="checkbox" bind:checked={math}>
     </div>
-    <Pentadecagon {...option} {math}/>
+    {#if math}
+        <Pentadecagon {...option} swidth={1} cwidth={1} math={math}/>
+    {:else}
+        <Pentadecagon {...option}/>
+    {/if}
 </main>
