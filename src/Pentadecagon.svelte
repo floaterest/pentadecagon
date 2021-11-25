@@ -11,7 +11,7 @@
     // background color
     export let background: string;
 
-    export let math: boolean = true;
+    export let math: boolean = false;
     $: fs = r / 25;
     $: fs2 = fs / 2;
 
