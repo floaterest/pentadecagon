@@ -94,7 +94,7 @@
     <path d="M{o} {o} A{r} {r} 0 0 1 {c.cy} {c.gy}"></path>
 
     {#if math}
-        <!-- helper lines at CB EN GP GO AF -->
+        <!-- auxiliary lines at CB EN GP GO AF -->
         <path d="M{c.mx} {c.cy} L{c.bx} {o} M{c.nx} {c.ey} V{o} M{c.cy} {o} v{-r2} L{o} {o} m0 {-r} L{c.fx} {c.fy}"
               stroke-dasharray={r / 50}></path>
         <!-- right angles at M N O P -->
