@@ -75,7 +75,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {size} {size}" width={size} height={size} fill="none"
      stroke-width={swidth} {stroke}
      style="background-color:{background};">
-    <circle stroke-width={cwidth} cx={o} cy={o} r={r}></circle>
+    <!-- outer circle -->
+    <path d="M{o} {cds.ay} A{r} {r} 0 0 1 {o} {cds.bx} A{r} {r} 0 1 1 {o} {cds.ay}"
+          stroke-width={cwidth}></path>
     <!-- x axis -->
     <line x1={cds.ay} y1={o} x2={cds.bx} y2={o}></line>
     <!-- y axis -->
