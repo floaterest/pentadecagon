@@ -77,9 +77,9 @@
      style="background-color:{background};">
     <circle stroke-width={cwidth} cx={o} cy={o} r={r}></circle>
     <!-- x axis -->
-    <line x1={o} y1={cds.ay} x2={o} y2={cds.bx}></line>
-    <!-- y axis -->
     <line x1={cds.ay} y1={o} x2={cds.bx} y2={o}></line>
+    <!-- y axis -->
+    <line x1={o} y1={cds.ay} x2={o} y2={cds.bx}></line>
     <!-- CD line -->
     <line x1={cds.mx} y1={cds.cy} x2={cds.mx} y2={cds.dy}></line>
     <!-- AM line -->
