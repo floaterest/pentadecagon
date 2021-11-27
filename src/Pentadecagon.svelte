@@ -91,6 +91,11 @@
             delay: duration / 2,
             length: cds.cy + cds.dy,
         },
+        cdl: {
+            duration: duration / 3,
+            delay: duration * 5 / 12,
+            length: cds.dy - cds.cy,
+        },
     });
 </script>
 
@@ -105,7 +110,7 @@
     <!-- y axis -->
     <line x1={o} y1={cds.bx} x2={o} y2={cds.ay} transition:draw={anime.yaxis}></line>
     <!-- CD line -->
-    <line x1={cds.mx} y1={cds.cy} x2={cds.mx} y2={cds.dy}></line>
+    <line x1={cds.mx} y1={cds.dy} x2={cds.mx} y2={cds.cy}  transition:draw={anime.cdl}></line>
     <!-- AM line -->
     <line x1={o} y1={cds.ay} x2={cds.mx} y2={o}></line>
     <!-- CD arc -->
