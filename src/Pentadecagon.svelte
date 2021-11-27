@@ -70,23 +70,27 @@
     })(cds.AF, r, r2, swidth / 2, cwidth / 2);
 
     $: square = `m0 ${-fs} l${fs} 0 l0 ${fs}`;
-    $: p = r * 2 * Math.PI;
-    let duration = 1000;
+    let duration = 10000;
 
-    const circle = () => ({
+    const draw = (_, { duration, delay, length } = { delay: 0 }) => ({
         duration,
+        delay,
         css: t => `
-            stroke-dasharray: ${~~p};
-            stroke-dashoffset: ${~~(p * (1 - t))};
+            stroke-dasharray: ${length};
+            stroke-dashoffset: ${~~(length * (1 - t))};
         `,
     });
 
-    const yaxis = () => ({
-        duration,
-        css: t => `
-            stroke-dasharray: ${d};
-            stroke-dashoffset: ${t < 0.5 ? d : ~~(d * (1 - t) * 2)};
-        `,
+    $: anime = ({
+        circle: {
+            duration,
+            length: r * 2 * Math.PI,
+        },
+        yaxis: {
+            duration: duration / 2,
+            delay: duration / 2,
+            length: cds.cy + cds.dy,
+        },
     });
 </script>
 
@@ -95,11 +99,11 @@
      style="background-color:{background};">
     <!-- outer circle -->
     <path d="M{o} {cds.ay} A{r} {r} 0 0 1 {o} {cds.bx} A{r} {r} 0 1 1 {o} {cds.ay}"
-          stroke-width={cwidth} transition:circle></path>
+          stroke-width={cwidth} transition:draw={anime.circle}></path>
     <!-- x axis -->
     <line x1={cds.ay} y1={o} x2={cds.bx} y2={o}></line>
     <!-- y axis -->
-    <line x1={o} y1={cds.bx} x2={o} y2={cds.ay} transition:yaxis></line>
+    <line x1={o} y1={cds.bx} x2={o} y2={cds.ay} transition:draw={anime.yaxis}></line>
     <!-- CD line -->
     <line x1={cds.mx} y1={cds.cy} x2={cds.mx} y2={cds.dy}></line>
     <!-- AM line -->
