@@ -18,6 +18,7 @@
     $: size = cwidth + r * 2;
     $: o = size / 2;
     $: r2 = r / 2;
+    $: d = r + r;
 
     // coordinates
     $: cds = ((o: number, r: number, r2: number) => {
@@ -50,14 +51,13 @@
             return Math.sqrt((rb - y) * (rb + y));
         }
 
-        let rr = r + r;
 
         let r1 = AF + s;
-        let c1 = r + (c - r1) * (c + r1) / rr;
+        let c1 = r + (c - r1) * (c + r1) / d;
         let y1 = c1 - c;
         let y2 = c1 + c;
 
-        let c2 = r2 + (c - s) * (c + s) / rr + s;
+        let c2 = r2 + (c - s) * (c + s) / d + s;
         let y3 = c2 + c;
         let y4 = c2 - c;
 
@@ -71,24 +71,23 @@
 
     $: square = `m0 ${-fs} l${fs} 0 l0 ${fs}`;
     $: p = r * 2 * Math.PI;
-    const draw = (node: SVGPathElement, { duration }) => {
-        return {
-            duration,
-            css: t => `
-                stroke-dasharray: ${~~p};
-                stroke-dashoffset: ${~~(p * (1 - t))}
-            `,
-        };
-    };
+    let duration = 1000;
+
+    const circle = () => ({
+        duration,
+        css: t => `
+            stroke-dasharray: ${~~p};
+            stroke-dashoffset: ${~~(p * (1 - t))};
+        `,
+    });
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {size} {size}" width={size} height={size} fill="none"
      stroke-width={swidth} {stroke}
      style="background-color:{background};">
     <!-- outer circle -->
-    <path transition:draw="{{duration: 1000}}"
-          d="M{o} {cds.ay} A{r} {r} 0 0 1 {o} {cds.bx} A{r} {r} 0 1 1 {o} {cds.ay}"
-          stroke-width={cwidth}></path>
+    <path d="M{o} {cds.ay} A{r} {r} 0 0 1 {o} {cds.bx} A{r} {r} 0 1 1 {o} {cds.ay}"
+          stroke-width={cwidth} transition:circle></path>
     <!-- x axis -->
     <line x1={cds.ay} y1={o} x2={cds.bx} y2={o}></line>
     <!-- y axis -->
