@@ -70,13 +70,24 @@
     })(cds.AF, r, r2, swidth / 2, cwidth / 2);
 
     $: square = `m0 ${-fs} l${fs} 0 l0 ${fs}`;
+    $: p = r * 2 * Math.PI;
+    const draw = (node: SVGPathElement, { duration }) => {
+        return {
+            duration,
+            css: t => `
+                stroke-dasharray: ${~~p};
+                stroke-dashoffset: ${~~(p * (1 - t))}
+            `,
+        };
+    };
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {size} {size}" width={size} height={size} fill="none"
      stroke-width={swidth} {stroke}
      style="background-color:{background};">
     <!-- outer circle -->
-    <path d="M{o} {cds.ay} A{r} {r} 0 0 1 {o} {cds.bx} A{r} {r} 0 1 1 {o} {cds.ay}"
+    <path transition:draw="{{duration: 1000}}"
+          d="M{o} {cds.ay} A{r} {r} 0 0 1 {o} {cds.bx} A{r} {r} 0 1 1 {o} {cds.ay}"
           stroke-width={cwidth}></path>
     <!-- x axis -->
     <line x1={cds.ay} y1={o} x2={cds.bx} y2={o}></line>
