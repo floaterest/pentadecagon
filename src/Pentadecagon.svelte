@@ -18,7 +18,6 @@
     $: size = cwidth + r * 2;
     $: o = size / 2;
     $: r2 = r / 2;
-    $: d = r + r;
 
     // coordinates
     $: cds = ((o: number, r: number, r2: number) => {
@@ -51,6 +50,7 @@
             return Math.sqrt((rb - y) * (rb + y));
         }
 
+        let d = r + r;
 
         let r1 = AF + s;
         let c1 = r + (c - r1) * (c + r1) / d;
