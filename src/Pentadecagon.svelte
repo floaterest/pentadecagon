@@ -80,6 +80,14 @@
             stroke-dashoffset: ${~~(p * (1 - t))};
         `,
     });
+
+    const yaxis = () => ({
+        duration,
+        css: t => `
+            stroke-dasharray: ${d};
+            stroke-dashoffset: ${t < 0.5 ? d : ~~(d * (1 - t) * 2)};
+        `,
+    });
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {size} {size}" width={size} height={size} fill="none"
@@ -91,7 +99,7 @@
     <!-- x axis -->
     <line x1={cds.ay} y1={o} x2={cds.bx} y2={o}></line>
     <!-- y axis -->
-    <line x1={o} y1={cds.ay} x2={o} y2={cds.bx}></line>
+    <line x1={o} y1={cds.bx} x2={o} y2={cds.ay} transition:yaxis></line>
     <!-- CD line -->
     <line x1={cds.mx} y1={cds.cy} x2={cds.mx} y2={cds.dy}></line>
     <!-- AM line -->
