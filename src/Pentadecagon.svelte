@@ -18,13 +18,12 @@
     $: size = cwidth + r * 2;
     $: o = size / 2;
     $: r2 = r / 2;
+    const sqrt5 = Math.sqrt(5);
 
     // coordinates
-    $: cds = ((o: number, r: number, r2: number) => {
-        let sqrt5 = Math.sqrt(5);
+    $: cds = ((o: number, r: number, r2: number, sqrt5) => {
         let EN = r / sqrt5;
         let MC = r2 * Math.sqrt(3);
-
         return {
             ay: o - r,
             bx: o + r,
@@ -43,7 +42,7 @@
 
             AF: r2 * (sqrt5 - 1),
         };
-    })(o, r, r2);
+    })(o, r, r2, sqrt5);
     // coordinates for the accent part
     $: acc = ((AF: number, r: number, r2: number, s: number, c: number) => {
         function x(rb: number, y: number){
@@ -103,6 +102,11 @@
                 delay: duration * 5 / 12,
                 length: p / 3,
             },
+            aml: {
+                duration: duration / 6,
+                delay: duration * 7 / 12,
+                length: r2 * sqrt5,
+            },
         };
     })();
 </script>
@@ -125,7 +129,8 @@
     <path d="M{cds.mx} {cds.dy} A{r} {r} 0 0 1 {cds.mx} {cds.cy}"
           transition:draw={anime.cda}></path>
     <!-- AM line -->
-    <line x1={o} y1={cds.ay} x2={cds.mx} y2={o}></line>
+    <line x1={cds.mx} y1={o} x2={o} y2={cds.ay}
+          transition:draw={anime.aml}></line>
     <!-- OE arc -->
     <path d="M{o} {o} A{r2} {r2} 0 0 1 {cds.nx} {cds.ey}"></path>
     <!-- EF arc -->
