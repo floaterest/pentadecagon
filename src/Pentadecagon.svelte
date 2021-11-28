@@ -108,9 +108,11 @@
     <!-- x axis -->
     <line x1={cds.ay} y1={o} x2={cds.bx} y2={o}></line>
     <!-- y axis -->
-    <line x1={o} y1={cds.bx} x2={o} y2={cds.ay} transition:draw={anime.yaxis}></line>
+    <line x1={o} y1={cds.bx} x2={o} y2={cds.ay}
+          transition:draw={anime.yaxis}></line>
     <!-- CD line -->
-    <line x1={cds.mx} y1={cds.dy} x2={cds.mx} y2={cds.cy}  transition:draw={anime.cdl}></line>
+    <line x1={cds.mx} y1={cds.dy} x2={cds.mx} y2={cds.cy}
+          transition:draw={anime.cdl}></line>
     <!-- AM line -->
     <line x1={o} y1={cds.ay} x2={cds.mx} y2={o}></line>
     <!-- CD arc -->
