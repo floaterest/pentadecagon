@@ -81,22 +81,30 @@
         `,
     });
 
-    $: anime = ({
-        circle: {
-            duration,
-            length: r * 2 * Math.PI,
-        },
-        yaxis: {
-            duration: duration / 2,
-            delay: duration / 2,
-            length: cds.cy + cds.dy,
-        },
-        cdl: {
-            duration: duration / 3,
-            delay: duration * 5 / 12,
-            length: cds.dy - cds.cy,
-        },
-    });
+    $: anime = (() => {
+        let p = r * 2 * Math.PI;
+        return {
+            circle: {
+                duration,
+                length: p,
+            },
+            yaxis: {
+                duration: duration / 2,
+                delay: duration / 2,
+                length: cds.cy + cds.dy,
+            },
+            cdl: {
+                duration: duration / 3,
+                delay: duration * 5 / 12,
+                length: cds.dy - cds.cy,
+            },
+            cda: {
+                duration: duration / 3,
+                delay: duration * 5 / 12,
+                length: p / 3,
+            },
+        };
+    })();
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {size} {size}" width={size} height={size} fill="none"
@@ -113,10 +121,11 @@
     <!-- CD line -->
     <line x1={cds.mx} y1={cds.dy} x2={cds.mx} y2={cds.cy}
           transition:draw={anime.cdl}></line>
+    <!-- CD arc -->
+    <path d="M{cds.mx} {cds.dy} A{r} {r} 0 0 1 {cds.mx} {cds.cy}"
+          transition:draw={anime.cda}></path>
     <!-- AM line -->
     <line x1={o} y1={cds.ay} x2={cds.mx} y2={o}></line>
-    <!-- CD arc -->
-    <path d="M{cds.mx} {cds.dy} A{r} {r} 0 0 1 {cds.mx} {cds.cy}"></path>
     <!-- OE arc -->
     <path d="M{o} {o} A{r2} {r2} 0 0 1 {cds.nx} {cds.ey}"></path>
     <!-- EF arc -->
