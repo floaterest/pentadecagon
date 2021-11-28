@@ -107,6 +107,11 @@
                 delay: duration * 7 / 12,
                 length: r2 * sqrt5,
             },
+            oea: {
+                duration: duration / 12,
+                delay: duration * 3 / 4,
+                length: p / 12,
+            },
         };
     })();
 </script>
@@ -133,7 +138,8 @@
     <line x1={cds.mx} y1={o} x2={o} y2={cds.ay}
           transition:draw={anime.aml}></line>
     <!-- OE arc -->
-    <path d="M{o} {o} A{r2} {r2} 0 0 1 {cds.nx} {cds.ey}"></path>
+    <path d="M{o} {o} A{r2} {r2} 0 0 1 {cds.nx} {cds.ey}"
+          transition:draw={anime.oea}></path>
     <!-- EF arc -->
     <path d="M{cds.nx} {cds.ey} A{cds.AF} {cds.AF} 0 0 1 {cds.fx} {cds.fy}"></path>
     <!-- OG arc -->
