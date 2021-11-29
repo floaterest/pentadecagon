@@ -137,31 +137,31 @@
      style="background-color:{background};">
     <!-- outer circle -->
     <path d="M{o} {cds.ay} A{r} {r} 0 0 1 {o} {cds.bx} A{r} {r} 0 1 1 {o} {cds.ay}"
-          stroke-width={cwidth} transition:draw={anime.circle}></path>
+          stroke-width={cwidth} in:draw={anime.circle}></path>
     <!-- x axis -->
     <line x1={cds.bx} y1={o} x2={cds.ay} y2={o}
-          transition:draw={anime.axis}></line>
+          in:draw={anime.axis}></line>
     <!-- y axis -->
     <line x1={o} y1={cds.bx} x2={o} y2={cds.ay}
-          transition:draw={anime.axis}></line>
+          in:draw={anime.axis}></line>
     <!-- CD line -->
     <line x1={cds.mx} y1={cds.dy} x2={cds.mx} y2={cds.cy}
-          transition:draw={anime.cdl}></line>
+          in:draw={anime.cdl}></line>
     <!-- CD arc -->
     <path d="M{cds.mx} {cds.dy} A{r} {r} 0 0 1 {cds.mx} {cds.cy}"
-          transition:draw={anime.cda}></path>
+          in:draw={anime.cda}></path>
     <!-- AM line -->
     <line x1={cds.mx} y1={o} x2={o} y2={cds.ay}
-          transition:draw={anime.aml}></line>
+          in:draw={anime.aml}></line>
     <!-- OE arc -->
     <path d="M{o} {o} A{r2} {r2} 0 0 1 {cds.nx} {cds.ey}"
-          transition:draw={anime.oea}></path>
+          in:draw={anime.oea}></path>
     <!-- OG arc -->
     <path d="M{o} {o} A{r} {r} 0 0 1 {cds.cy} {cds.gy}"
-          transition:draw={anime.oga}></path>
+          in:draw={anime.oga}></path>
     <!-- EF arc -->
     <path d="M{cds.nx} {cds.ey} A{cds.AF} {cds.AF} 0 0 1 {cds.fx} {cds.fy}"
-          transition:draw={anime.efa}></path>
+          in:draw={anime.efa}></path>
 
     {#if math}
         <!-- auxiliary lines at CB EN GP GO AF -->
@@ -172,7 +172,7 @@
     {:else}
         <!-- FG arc (accent) -->
         <path d="M{acc.x1} {acc.y1} A{acc.r1} {acc.r1} 0 0 1 {acc.x2} {acc.y2} A{acc.r2} {acc.r2} 0 0 0 {acc.x3} {acc.y3} A{acc.r3} {acc.r3} 0 0 0 {acc.x4} {acc.y4} A{acc.r4} {acc.r4} 0 0 1 {acc.x1} {acc.y1}"
-              fill={accent} stroke-width="0" transition:blur={anime.fga}></path>
+              fill={accent} stroke-width="0" in:blur={anime.fga}></path>
     {/if}
 </svg>
 
