@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { fade, blur } from 'svelte/transition';
+    import { blur } from 'svelte/transition';
 
     export let r: number;
     // stroke width
