@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { fade, blur } from 'svelte/transition';
+
     export let r: number;
     // stroke width
     export let swidth: number;
@@ -122,6 +124,10 @@
                 delay: duration * 5 / 6,
                 length: cds.AF * (Math.asin(1 / sqrt5) + Math.asin((sqrt5 + 1) * Math.sqrt(10 - 2 * sqrt5) / 8)),
             },
+            fga: {
+                duration: duration / 10,
+                delay: duration * 9 / 10,
+            },
         };
     })();
 </script>
@@ -166,7 +172,7 @@
     {:else}
         <!-- FG arc (accent) -->
         <path d="M{acc.x1} {acc.y1} A{acc.r1} {acc.r1} 0 0 1 {acc.x2} {acc.y2} A{acc.r2} {acc.r2} 0 0 0 {acc.x3} {acc.y3} A{acc.r3} {acc.r3} 0 0 0 {acc.x4} {acc.y4} A{acc.r4} {acc.r4} 0 0 1 {acc.x1} {acc.y1}"
-              fill={accent} stroke-width="0"></path>
+              fill={accent} stroke-width="0" transition:blur={anime.fga}></path>
     {/if}
 </svg>
 
