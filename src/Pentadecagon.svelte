@@ -112,6 +112,11 @@
                 delay: duration * 3 / 4,
                 length: p / 12,
             },
+            oga: {
+                duration: duration / 12,
+                delay: duration * 3 / 4,
+                length: p / 6,
+            },
         };
     })();
 </script>
@@ -140,10 +145,11 @@
     <!-- OE arc -->
     <path d="M{o} {o} A{r2} {r2} 0 0 1 {cds.nx} {cds.ey}"
           transition:draw={anime.oea}></path>
+    <!-- OG arc -->
+    <path d="M{o} {o} A{r} {r} 0 0 1 {cds.cy} {cds.gy}"
+          transition:draw={anime.oga}></path>
     <!-- EF arc -->
     <path d="M{cds.nx} {cds.ey} A{cds.AF} {cds.AF} 0 0 1 {cds.fx} {cds.fy}"></path>
-    <!-- OG arc -->
-    <path d="M{o} {o} A{r} {r} 0 0 1 {cds.cy} {cds.gy}"></path>
 
     {#if math}
         <!-- auxiliary lines at CB EN GP GO AF -->
