@@ -117,6 +117,11 @@
                 delay: duration * 3 / 4,
                 length: p / 6,
             },
+            efa: {
+                duration: duration / 15,
+                delay: duration * 5 / 6,
+                length: cds.AF * (Math.asin(1 / sqrt5) + Math.asin((sqrt5 + 1) * Math.sqrt(10 - 2 * sqrt5) / 8)),
+            },
         };
     })();
 </script>
@@ -149,7 +154,8 @@
     <path d="M{o} {o} A{r} {r} 0 0 1 {cds.cy} {cds.gy}"
           transition:draw={anime.oga}></path>
     <!-- EF arc -->
-    <path d="M{cds.nx} {cds.ey} A{cds.AF} {cds.AF} 0 0 1 {cds.fx} {cds.fy}"></path>
+    <path d="M{cds.nx} {cds.ey} A{cds.AF} {cds.AF} 0 0 1 {cds.fx} {cds.fy}"
+          transition:draw={anime.efa}></path>
 
     {#if math}
         <!-- auxiliary lines at CB EN GP GO AF -->
