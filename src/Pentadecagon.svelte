@@ -1,5 +1,8 @@
 <script lang="ts">
-    import { blur } from 'svelte/transition';
+    import { blur, draw } from 'svelte/transition';
+    import { linear } from 'svelte/easing';
+
+    const drw = (node, { delay, duration }) => draw(node, { delay, duration, easing: linear });
 
     export let r: number;
     // stroke width
@@ -73,63 +76,43 @@
     $: square = `m0 ${-fs} l${fs} 0 l0 ${fs}`;
     let duration = 10000;
 
-    const draw = (_, { duration, delay, length } = { delay: 0 }) => ({
-        duration,
-        delay,
-        css: t => `
-            stroke-dasharray: ${length};
-            stroke-dashoffset: ${~~(length * (1 - t))};
-        `,
-    });
-
-    $: anime = (() => {
-        let p = r * 2 * Math.PI;
-        return {
-            circle: {
-                duration,
-                length: p,
-            },
-            axis: {
-                duration: duration / 2,
-                delay: duration / 2,
-                length: cds.cy + cds.dy,
-            },
-            cdl: {
-                duration: duration / 3,
-                delay: duration * 5 / 12,
-                length: cds.dy - cds.cy,
-            },
-            cda: {
-                duration: duration / 3,
-                delay: duration * 5 / 12,
-                length: p / 3,
-            },
-            aml: {
-                duration: duration / 6,
-                delay: duration * 7 / 12,
-                length: r2 * sqrt5,
-            },
-            oea: {
-                duration: duration / 12,
-                delay: duration * 3 / 4,
-                length: p / 12,
-            },
-            oga: {
-                duration: duration / 12,
-                delay: duration * 3 / 4,
-                length: p / 6,
-            },
-            efa: {
-                duration: duration / 15,
-                delay: duration * 5 / 6,
-                length: cds.AF * (Math.asin(1 / sqrt5) + Math.asin((sqrt5 + 1) * Math.sqrt(10 - 2 * sqrt5) / 8)),
-            },
-            fga: {
-                duration: duration / 10,
-                delay: duration * 9 / 10,
-            },
-        };
-    })();
+    $: anime = {
+        circle: {
+            duration,
+        },
+        axis: {
+            duration: duration / 2,
+            delay: duration / 2,
+        },
+        cdl: {
+            duration: duration / 3,
+            delay: duration * 5 / 12,
+        },
+        cda: {
+            duration: duration / 3,
+            delay: duration * 5 / 12,
+        },
+        aml: {
+            duration: duration / 6,
+            delay: duration * 7 / 12,
+        },
+        oea: {
+            duration: duration / 12,
+            delay: duration * 3 / 4,
+        },
+        oga: {
+            duration: duration / 12,
+            delay: duration * 3 / 4,
+        },
+        efa: {
+            duration: duration / 15,
+            delay: duration * 5 / 6,
+        },
+        fga: {
+            duration: duration / 10,
+            delay: duration * 9 / 10,
+        },
+    };
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {size} {size}" width={size} height={size} fill="none"
@@ -137,31 +120,31 @@
      style="background-color:{background};">
     <!-- outer circle -->
     <path d="M{o} {cds.ay} A{r} {r} 0 0 1 {o} {cds.bx} A{r} {r} 0 1 1 {o} {cds.ay}"
-          stroke-width={cwidth} in:draw={anime.circle}></path>
+          stroke-width={cwidth} in:drw="{anime.circle}"></path>
     <!-- x axis -->
     <line x1={cds.bx} y1={o} x2={cds.ay} y2={o}
-          in:draw={anime.axis}></line>
+          in:drw="{anime.axis}"></line>
     <!-- y axis -->
     <line x1={o} y1={cds.bx} x2={o} y2={cds.ay}
-          in:draw={anime.axis}></line>
+          in:drw="{anime.axis}"></line>
     <!-- CD line -->
     <line x1={cds.mx} y1={cds.dy} x2={cds.mx} y2={cds.cy}
-          in:draw={anime.cdl}></line>
+          in:drw="{anime.cdl}"></line>
     <!-- CD arc -->
     <path d="M{cds.mx} {cds.dy} A{r} {r} 0 0 1 {cds.mx} {cds.cy}"
-          in:draw={anime.cda}></path>
+          in:drw="{anime.cda}"></path>
     <!-- AM line -->
     <line x1={cds.mx} y1={o} x2={o} y2={cds.ay}
-          in:draw={anime.aml}></line>
+          in:drw="{anime.aml}"></line>
     <!-- OE arc -->
     <path d="M{o} {o} A{r2} {r2} 0 0 1 {cds.nx} {cds.ey}"
-          in:draw={anime.oea}></path>
+          in:drw="{anime.oea}"></path>
     <!-- OG arc -->
     <path d="M{o} {o} A{r} {r} 0 0 1 {cds.cy} {cds.gy}"
-          in:draw={anime.oga}></path>
+          in:drw="{anime.oga}"></path>
     <!-- EF arc -->
     <path d="M{cds.nx} {cds.ey} A{cds.AF} {cds.AF} 0 0 1 {cds.fx} {cds.fy}"
-          in:draw={anime.efa}></path>
+          in:drw="{anime.efa}"></path>
 
     {#if math}
         <!-- auxiliary lines at CB EN GP GO AF -->
