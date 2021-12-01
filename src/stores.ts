@@ -1,10 +1,13 @@
-import { writable, derived, Writable } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 
 import type Option from './Option';
 
 const sqrt5 = Math.sqrt(5);
 
-const def: Option = {
+/**
+ * initial option
+ */
+const init: Option = {
     r: 500,
     swidth: 20,
     cwidth: 40,
@@ -13,23 +16,26 @@ const def: Option = {
     background: 'black',
 };
 
-export const opt = ((opt: Option) => {
+/**
+ * option with some other common values
+ */
+export const option = ((opt: Option) => {
     const d = opt.r * 2;
     const size = opt.cwidth + d;
-    console.log('compute opt');
+
     return writable({
         ...opt,
         d,
         size,
-
         r2: opt.r / 2,
         o: size / 2,
     });
-})(def);
+})(init);
 
-export const cds = derived(opt, ({ r, r2, o }) => {
-    console.log('compute cds');
-
+/**
+ * coordinates for the figure (and also length of AF (which is a radius))
+ */
+export const coords = derived(option, ({ r, r2, o }) => {
     const EN = r / sqrt5;
     const MC = r2 * Math.sqrt(3);
 
@@ -53,7 +59,10 @@ export const cds = derived(opt, ({ r, r2, o }) => {
     };
 });
 
-export const acc = derived(opt, ({ r, r2, o, d, swidth, cwidth }) => {
+/**
+ * coordinates sophisticated for the 1/15 part of the perimeter (taking stroke-width into consideration)
+ */
+export const fifteenth = derived(option, ({ r, r2, o, d, swidth, cwidth }) => {
     function x(rc: number, y: number){
         /**
          * x^2 + y^2 = (r+c)^2 => x = sqrt((r+c-y) * (r+c+y))
@@ -65,9 +74,8 @@ export const acc = derived(opt, ({ r, r2, o, d, swidth, cwidth }) => {
         return Math.sqrt((rc - y) * (rc + y));
     }
 
-    console.log('compute acc');
     let AF;
-    cds.subscribe(v => AF = v.AF);
+    coords.subscribe(v => AF = v.AF);
     const s = swidth / 2;
     const c = cwidth / 2;
     // radius of outer EF arc
