@@ -1,14 +1,7 @@
 <script lang="ts">
     import Pentadecagon from './Pentadecagon.svelte';
+    import { opt } from './stores';
 
-    let option = {
-        r: 500,
-        swidth: 20,
-        cwidth: 40,
-        stroke: 'white',
-        accent: '#39c5bb',
-        background: 'black',
-    };
     let math = false;
     let visible = true;
 
@@ -23,19 +16,19 @@
 <main>
     <div>
         <button on:click={handleClick}>play</button>
-        <input type="number" bind:value={option.r}>
-        <input type="number" bind:value={option.swidth} disabled={math?"disabled":""}>
-        <input type="number" bind:value={option.cwidth} disabled={math?"disabled":""}>
-        <input type="text" bind:value={option.stroke}>
-        <input type="text" bind:value={option.accent}>
-        <input type="text" bind:value={option.background}>
+        <input type="number" bind:value={$opt.r}>
+        <input type="number" bind:value={$opt.swidth} disabled={math?"disabled":""}>
+        <input type="number" bind:value={$opt.cwidth} disabled={math?"disabled":""}>
+        <input type="text" bind:value={$opt.stroke}>
+        <input type="text" bind:value={$opt.accent}>
+        <input type="text" bind:value={$opt.background}>
         <input type="checkbox" bind:checked={math}>
     </div>
     {#if visible}
         {#if math}
-            <Pentadecagon {...option} swidth={1} cwidth={1} {math}/>
+            <Pentadecagon {math}/>
         {:else}
-            <Pentadecagon {...option} {math}/>
+            <Pentadecagon {math}/>
         {/if}
     {/if}
 </main>
