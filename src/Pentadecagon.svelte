@@ -18,18 +18,23 @@
 
     export let math: boolean;
 
+    const sqrt5 = Math.sqrt(5);
+    // font size for marking coordinates
     $: fs = r / 25;
     $: fs2 = fs / 2;
 
-    $: size = cwidth + r * 2;
-    $: o = size / 2;
     $: r2 = r / 2;
-    const sqrt5 = Math.sqrt(5);
+    $: d = r * 2;
+
+    $: size = cwidth + d;
+    // center of the circle
+    $: o = size / 2;
 
     // coordinates
-    $: cds = ((o: number, r: number, r2: number, sqrt5) => {
-        let EN = r / sqrt5;
-        let MC = r2 * Math.sqrt(3);
+    $: cds = (() => {
+        const EN = r / sqrt5;
+        const MC = r2 * Math.sqrt(3);
+
         return {
             ay: o - r,
             bx: o + r,
@@ -48,23 +53,35 @@
 
             AF: r2 * (sqrt5 - 1),
         };
-    })(o, r, r2, sqrt5);
+    })();
+
     // coordinates for the accent part
-    $: acc = ((AF: number, r: number, r2: number, s: number, c: number) => {
-        function x(rb: number, y: number){
-            return Math.sqrt((rb - y) * (rb + y));
+    $: acc = ((AF: number, s: number, c: number) => {
+        function x(rc: number, y: number){
+            /**
+             * x^2 + y^2 = (r+c)^2
+             * => x = sqrt((r+c-y) * (r+c+y))
+             *
+             * or
+             *
+             * x^2 + y^2 = (r+c)^2
+             * => x = sqrt((r-c-y) * (r-c+y))
+             */
+            return Math.sqrt((rc - y) * (rc + y));
         }
 
-        let d = r + r;
+        // radius of outer EF arc
+        const r1 = AF + s;
 
-        let r1 = AF + s;
-        let c1 = r + (c - r1) * (c + r1) / d;
-        let y1 = c1 - c;
-        let y2 = c1 + c;
+        // y-coords on outer EF arc
+        const c1 = r + (c - r1) * (c + r1) / d;
+        const y1 = c1 - c;
+        const y2 = c1 + c;
 
-        let c2 = r2 + (c - s) * (c + s) / d + s;
-        let y3 = c2 + c;
-        let y4 = c2 - c;
+        // y-coords on inner OG arc
+        const c2 = r2 + (c - s) * (c + s) / d + s;
+        const y3 = c2 + c;
+        const y4 = c2 - c;
 
         return {
             x1: o - x(r - c, y1), y1: o - y1, r1: r1,
@@ -72,12 +89,13 @@
             x3: o - x(r + c, y3), y3: o - y3, r3: r - s,
             x4: o - x(r - c, y4), y4: o - y4, r4: r - c,
         };
-    })(cds.AF, r, r2, swidth / 2, cwidth / 2);
+    })(cds.AF, swidth / 2, cwidth / 2);
 
+    // svg path for the right angle mark
     $: square = `m0 ${-fs} l${fs} 0 l0 ${fs}`;
-    let duration = 10000;
 
-    $: anime = {
+    // configuration for animations
+    $: anime = ((duration: number) => ({
         circle: {
             duration,
         },
@@ -113,7 +131,7 @@
             duration: duration / 10,
             delay: duration * 9 / 10,
         },
-    };
+    }))(10000);
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {size} {size}" width={size} height={size} fill="none"
