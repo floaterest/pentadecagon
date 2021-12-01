@@ -33,9 +33,9 @@
     </div>
     {#if visible}
         {#if math}
-            <Pentadecagon {...option} swidth={1} cwidth={1} math={math}/>
+            <Pentadecagon {...option} swidth={1} cwidth={1} {math}/>
         {:else}
-            <Pentadecagon {...option}/>
+            <Pentadecagon {...option} {math}/>
         {/if}
     {/if}
 </main>
