@@ -1,8 +1,10 @@
 <script lang="ts">
     import Pentadecagon from './Pentadecagon.svelte';
+    import Annotations from './Annotations.svelte';
+
     import { option } from './stores';
 
-    let math = false;
+    let math = true;
     let visible = true;
 
     function rerender(){
@@ -26,5 +28,13 @@
     </div>
     {#if visible}
         <Pentadecagon {math}/>
+        {#if math}
+            <Annotations/>
+            <style>
+                svg{
+                    position: absolute;
+                }
+            </style>
+        {/if}
     {/if}
 </main>
