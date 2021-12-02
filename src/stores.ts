@@ -50,7 +50,7 @@ export const coords = derived(option, ({ r, r2, o }) => {
         nx: o + (r - EN) / 2,
         ey: o - EN,
 
-        fx: o - r * Math.sqrt(10 - 2 * sqrt5) / 4,
+        fx: o - r * Math.sqrt((5 - sqrt5) / 8),
         fy: o - r * (sqrt5 + 1) / 4,
 
         gy: o - r2,
@@ -75,9 +75,11 @@ export const fifteenth = derived(option, ({ r, r2, o, d, swidth, cwidth }) => {
     }
 
     let AF;
-    coords.subscribe(v => AF = v.AF);
+    coords.subscribe(cds => AF = cds.AF);
     const s = swidth / 2;
     const c = cwidth / 2;
+    const rmc = r - c;
+    const rpc = r + c;
     // radius of outer EF arc
     const r1 = AF + s;
 
@@ -92,9 +94,9 @@ export const fifteenth = derived(option, ({ r, r2, o, d, swidth, cwidth }) => {
     const y4 = c2 - c;
 
     return {
-        x1: o - x(r - c, y1), y1: o - y1, r1: r1,
-        x2: o - x(r + c, y2), y2: o - y2, r2: r + c,
-        x3: o - x(r + c, y3), y3: o - y3, r3: r - s,
-        x4: o - x(r - c, y4), y4: o - y4, r4: r - c,
+        x1: o - x(rmc, y1), y1: o - y1, r1: r1,
+        x2: o - x(rpc, y2), y2: o - y2, r2: rpc,
+        x3: o - x(rpc, y3), y3: o - y3, r3: r - s,
+        x4: o - x(rmc, y4), y4: o - y4, r4: rmc,
     };
 });
