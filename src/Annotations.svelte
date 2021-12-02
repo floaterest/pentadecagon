@@ -8,6 +8,7 @@
     $: fs2 = fs / 2;
     $: square = `m0 ${-fs} l${fs} 0 l0 ${fs}`;
 </script>
+
 <svg width={size} height={size} {stroke}>
     <!-- auxiliary lines at CB EN GP GO AF -->
     <path d="M{$coords.mx} {$coords.cy} L{$coords.bx} {o}

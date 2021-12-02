@@ -4,14 +4,14 @@
     import { blur, draw } from 'svelte/transition';
     import { linear } from 'svelte/easing';
 
-    const drw = (node, { delay, duration }) => draw(node, { delay, duration, easing: linear });
-
     export let math: boolean;
+
+    const drw = (node, { delay, duration }) => draw(node, { delay, duration, easing: linear });
     const { r, size, r2, o, swidth, cwidth, stroke, accent, background } = $option;
+
     // set all stroke widths to 1 if math
     $: sw = math ? 1 : swidth;
     $: cw = math ? 1 : cwidth;
-
 
     // configuration for animations
     $: anime = ((duration: number) => ({
