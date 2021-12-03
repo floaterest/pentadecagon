@@ -6,7 +6,8 @@
 
     export let math: boolean;
 
-    const drw = (node, { delay, duration }) => draw(node, { delay, duration, easing: linear });
+    // disable animation if math
+    const drw = math ? () => {} : (node, { delay, duration }) => draw(node, { delay, duration, easing: linear });
     const { r, size, r2, o, swidth, cwidth, stroke, accent, background } = $option;
 
     // set all stroke widths to 1 if math
