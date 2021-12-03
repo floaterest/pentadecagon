@@ -17,7 +17,7 @@
 
 <main>
     <div>
-        <button on:click={rerender}>play</button>
+        <button on:click={rerender} disabled={math?"disabled":""}>play</button>
         <input type="number" bind:value={$option.r}>
         <input type="number" bind:value={$option.swidth} disabled={math?"disabled":""}>
         <input type="number" bind:value={$option.cwidth} disabled={math?"disabled":""}>
