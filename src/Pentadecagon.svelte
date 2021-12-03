@@ -1,10 +1,12 @@
 <script lang="ts">
-    import { option, coords, fifteenth } from './stores';
-
     import { blur, draw } from 'svelte/transition';
     import { linear } from 'svelte/easing';
 
+    import { option, coords, fifteenth } from './stores';
+    import type { Transition } from './Interfaces';
+
     export let math: boolean;
+    export let transition: Transition;
 
     // disable animation if math
     const drw = math ? () => {} : (node, { delay, duration }) => draw(node, { delay, duration, easing: linear });
@@ -13,76 +15,37 @@
     // set all stroke widths to 1 if math
     $: sw = math ? 1 : swidth;
     $: cw = math ? 1 : cwidth;
-
-    // configuration for animations
-    $: anime = ((duration: number) => ({
-        circle: {
-            duration,
-        },
-        axis: {
-            duration: duration / 2,
-            delay: duration / 2,
-        },
-        cdl: {
-            duration: duration / 3,
-            delay: duration * 5 / 12,
-        },
-        cda: {
-            duration: duration / 3,
-            delay: duration * 5 / 12,
-        },
-        aml: {
-            duration: duration / 6,
-            delay: duration * 7 / 12,
-        },
-        oea: {
-            duration: duration / 12,
-            delay: duration * 3 / 4,
-        },
-        oga: {
-            duration: duration / 12,
-            delay: duration * 3 / 4,
-        },
-        efa: {
-            duration: duration / 15,
-            delay: duration * 5 / 6,
-        },
-        fga: {
-            duration: duration / 10,
-            delay: duration * 9 / 10,
-        },
-    }))(10000);
 </script>
 
 <svg width={size} height={size} stroke-width={sw} {stroke}
      style="background-color:{background};">
     <!-- outer circle -->
     <path d="M{o} {$coords.ay} A{r} {r} 0 0 1 {o} {$coords.bx} A{r} {r} 0 1 1 {o} {$coords.ay}"
-          stroke-width={cw} in:drw="{anime.circle}"></path>
+          stroke-width={cw} in:drw="{transition.circle}"></path>
     <!-- x axis -->
     <line x1={$coords.bx} y1={o} x2={$coords.ay} y2={o}
-          in:drw="{anime.axis}"></line>
+          in:drw="{transition.xaxis}"></line>
     <!-- y axis -->
     <line x1={o} y1={$coords.bx} x2={o} y2={$coords.ay}
-          in:drw="{anime.axis}"></line>
+          in:drw="{transition.yaxis}"></line>
     <!-- CD line -->
     <line x1={$coords.mx} y1={$coords.dy} x2={$coords.mx} y2={$coords.cy}
-          in:drw="{anime.cdl}"></line>
+          in:drw="{transition.cdl}"></line>
     <!-- CD arc -->
     <path d="M{$coords.mx} {$coords.dy} A{r} {r} 0 0 1 {$coords.mx} {$coords.cy}"
-          in:drw="{anime.cda}"></path>
+          in:drw="{transition.cda}"></path>
     <!-- AM line -->
     <line x1={$coords.mx} y1={o} x2={o} y2={$coords.ay}
-          in:drw="{anime.aml}"></line>
+          in:drw="{transition.aml}"></line>
     <!-- OE arc -->
     <path d="M{o} {o} A{r2} {r2} 0 0 1 {$coords.nx} {$coords.ey}"
-          in:drw="{anime.oea}"></path>
+          in:drw="{transition.oea}"></path>
     <!-- OG arc -->
     <path d="M{o} {o} A{r} {r} 0 0 1 {$coords.cy} {$coords.gy}"
-          in:drw="{anime.oga}"></path>
+          in:drw="{transition.oga}"></path>
     <!-- EF arc -->
     <path d="M{$coords.nx} {$coords.ey} A{$coords.AF} {$coords.AF} 0 0 1 {$coords.fx} {$coords.fy}"
-          in:drw="{anime.efa}"></path>
+          in:drw="{transition.efa}"></path>
 
     {#if !math}
         <!-- FG arc (accent) -->
@@ -91,7 +54,7 @@
                  A{$fifteenth.r2} {$fifteenth.r2} 0 0 0 {$fifteenth.x3} {$fifteenth.y3}
                  A{$fifteenth.r3} {$fifteenth.r3} 0 0 0 {$fifteenth.x4} {$fifteenth.y4}
                  A{$fifteenth.r4} {$fifteenth.r4} 0 0 1 {$fifteenth.x1} {$fifteenth.y1}"
-              fill={accent} stroke-width="0" in:blur={anime.fga}></path>
+              fill={accent} stroke-width="0" in:blur={transition.fga}></path>
     {/if}
 </svg>
 
