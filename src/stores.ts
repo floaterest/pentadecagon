@@ -1,20 +1,7 @@
 import { writable, derived } from 'svelte/store';
 
-import type Option from './Option';
-
-const sqrt5 = Math.sqrt(5);
-
-/**
- * initial option
- */
-const init: Option = {
-    r: 500,
-    swidth: 20,
-    cwidth: 40,
-    stroke: 'white',
-    accent: '#39c5bb',
-    background: 'black',
-};
+import { sqrt5, init } from './constants';
+import type Option from './Interfaces';
 
 /**
  * option with some other common values
