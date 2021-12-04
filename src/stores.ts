@@ -1,7 +1,7 @@
 import { writable, derived } from 'svelte/store';
 
 import { sqrt5, init } from './constants';
-import type Option from './Interfaces';
+import type { Option } from './Interfaces';
 
 /**
  * option with some other common values
