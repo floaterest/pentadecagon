@@ -10,7 +10,9 @@
 
     // disable animation if math
     const drw = math ? () => {} : (node, { delay, duration }) => draw(node, { delay, duration, easing: linear });
-    const { r, size, r2, o, swidth, cwidth, stroke, accent, background } = $option;
+
+    let r, size, r2, o, swidth, cwidth, stroke, accent, background;
+    $:(() => ({ r, size, r2, o, swidth, cwidth, stroke, accent, background } = $option))();
 
     // set all stroke widths to 1 if math
     $: sw = math ? 1 : swidth;
