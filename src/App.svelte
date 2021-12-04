@@ -2,8 +2,8 @@
     import Pentadecagon from './Pentadecagon.svelte';
     import Annotations from './Annotations.svelte';
 
-    import { option } from './stores';
-    import { transitions } from './constants';
+    import { option, createOption } from './stores';
+    import { transitions, init } from './constants';
     import type { Transition } from './Interfaces';
 
     let math = false;
@@ -21,16 +21,19 @@
         transition = tr;
         rerender();
     }
+
+    let opt = { ...init };
+    $: option.set(createOption(opt));
 </script>
 
 <main>
     <div>
-        <input type="number" bind:value={$option.r}>
-        <input type="number" bind:value={$option.swidth} disabled={math?"disabled":""}>
-        <input type="number" bind:value={$option.cwidth} disabled={math?"disabled":""}>
-        <input type="text" bind:value={$option.stroke}>
-        <input type="text" bind:value={$option.accent}>
-        <input type="text" bind:value={$option.background}>
+        <input type="number" bind:value={opt.r}>
+        <input type="number" bind:value={opt.swidth} disabled={math?"disabled":""}>
+        <input type="number" bind:value={opt.cwidth} disabled={math?"disabled":""}>
+        <input type="text" bind:value={opt.stroke}>
+        <input type="text" bind:value={opt.accent}>
+        <input type="text" bind:value={opt.background}>
         <input type="checkbox" on:click={rerender} bind:checked={math}>
     </div>
     <div>

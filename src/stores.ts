@@ -3,21 +3,23 @@ import { writable, derived } from 'svelte/store';
 import { sqrt5, init } from './constants';
 import type { Option } from './Interfaces';
 
-/**
- * option with some other common values
- */
-export const option = ((opt: Option) => {
+export function createOption(opt: Option){
     const d = opt.r * 2;
     const size = opt.cwidth + d;
 
-    return writable({
+    return {
         ...opt,
         d,
         size,
         r2: opt.r / 2,
         o: size / 2,
-    });
-})(init);
+    };
+}
+
+/**
+ * option with some other common values
+ */
+export const option = writable(createOption(init));
 
 /**
  * coordinates for the figure (and also length of AF (which is a radius))
