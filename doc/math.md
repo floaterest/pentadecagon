@@ -23,6 +23,7 @@ Consider this figure. We need to find the coordinates of all points (`A` to `G`,
 ![](assets/dark/e.svg)
 
 (we also need to find `|AE|` for point [`F`](#f))
+
 ![](assets/dark/ae.svg)
 
 # F
