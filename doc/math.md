@@ -3,7 +3,7 @@
 
 Consider this figure. We need to find the coordinates of all points (`A` to `G`, along with oters) in terms of `r` (the radius of circle `O`). To make the process easier, let's assume the center of the circle (point `O`) is at `(0,0)`
 
-<details open>
+<details>
     <summary>tl;dr spoiler</summary>
 
 ![](assets/dark/vars.svg)
