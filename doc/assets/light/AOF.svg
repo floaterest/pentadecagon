@@ -1,0 +1,50 @@
+<svg width="313" height="286" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+	<style type="text/css">
+		path{
+			fill: none;
+			stroke: black;
+			stroke-linecap: round;
+			stroke-linejoin: round;
+			stroke-width: 2.5;
+			stroke-opacity: 0.7;
+		}
+		path.aux{
+			stroke-dasharray: 10;
+			stroke-linecap: square;
+		}
+		text{
+			font-family: sans-serif;
+			fill: black;
+			stroke: none;
+		}
+		text.back{
+			fill: none;
+			stroke: white;
+			stroke-width: 3;
+		}
+	</style>
+	<g style="transform: translate(-143px,-11px);">
+		<path d="M 144.86956800466186 76.25468604538764 C 159.95287353638275 122.67632716654924 194.52295944427894 160.21671584835678 239.54685207845995 179.0667546337524 C 284.570744712641 197.916793419148 335.57502507725025 196.20360733793854 379.2325547384226 174.37484250735247"/>
+		<path d="M 304.27542516439667 24.460583359300813 L 304.27542516439667 566.8554683552114"/>
+		<path d="M 304.27542516439667 24.460583359300813 L 439.8741464133749 295.6580258572561"/>
+		<path d="M 304.27542516439667 295.6580258572561 L 439.8741464133749 295.6580258572561"/>
+		<path class="aux" d="M 144.86956800466186 76.25468604538767 L 304.27542516439667 76.25468604538767"/>
+		<path class="aux" d="M 144.86956800466186 76.25468604538767 L 304.27542516439667 24.460583359300813"/>
+		<path class="aux" d="M 144.86956800466186 76.25468604538767 L 304.27542516439667 295.6580258572561"/>
+		<path class="aux" d="M 224.57249658452926 50.35763470234426 L 304.27542516439667 295.6580258572561"/>
+		<text class="back" x="231" y="46">H</text>
+		<text x="231" y="46">H</text>
+		<text class="back" x="310" y="82">I</text>
+		<text x="310" y="82">I</text>
+		<text class="back" x="308" y="294">O</text>
+		<text x="308" y="294">O</text>
+		<text class="back" x="308" y="22">A</text>
+		<text x="308" y="22">A</text>
+		<text class="back" x="444" y="294">M</text>
+		<text x="444" y="294">M</text>
+		<text class="back" x="383" y="172">E</text>
+		<text x="383" y="172">E</text>
+		<text class="back" x="149" y="74">F</text>
+		<text x="149" y="74">F</text>
+	</g>
+</svg>
