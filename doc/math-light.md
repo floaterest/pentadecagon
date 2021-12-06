@@ -1,4 +1,4 @@
-# Mathematical Explanations
+# The Geometrical Approach
 > for dark theme version, see [here](math.md)
 
 ![](assets/light/o.svg)
