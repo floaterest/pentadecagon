@@ -1,4 +1,4 @@
-# The Geometrical Approach
+# A Geometrical Approach
 > for light theme version, see [here](math-light.md)
 
 ![](assets/dark/o.svg)
@@ -43,3 +43,12 @@ Consider this figure. We need to find the coordinates of all points (`A` to `G`,
 ![](assets/dark/POG.svg)
 
 ![](assets/dark/g.svg)
+
+# An Algebraic Approach
+This is a zoomed-in view of the arc `FG`. Because we are considering the stroke widths, we need to find the 4 intersections (`y1` to `y4`) of the 4 graphs using algebra.
+Let the stroke width of the center circle be `2c` and the others, `2s`. 
+
+![](assets/dark/hl.png)
+
+![](assets/dark/alg.svg)
+![](assets/dark/ys.svg)
