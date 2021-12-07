@@ -11,15 +11,15 @@ Consider this figure. We need to find the coordinates of all points (`A` to `G`,
 ![](assets/dark/vars.svg)
 </details>
 
-# A and B
+## A and B
 ![](assets/dark/ab.svg)
 
-# C and D
+## C and D
 ![](assets/dark/BOC.svg)
 
 ![](assets/dark/cd.svg)
 
-# E
+## E
 ![](assets/dark/AOM.svg)
 
 ![](assets/dark/e.svg)
@@ -28,7 +28,7 @@ Consider this figure. We need to find the coordinates of all points (`A` to `G`,
 
 ![](assets/dark/ae.svg)
 
-# F
+## F
 ![](assets/dark/AOF.svg)
 
 ![](assets/dark/f.svg)
@@ -39,7 +39,7 @@ Consider this figure. We need to find the coordinates of all points (`A` to `G`,
     ![](assets/dark/trivial.svg)
     </details>
 
-# G
+## G
 ![](assets/dark/POG.svg)
 
 ![](assets/dark/g.svg)
