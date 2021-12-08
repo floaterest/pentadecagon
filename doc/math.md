@@ -51,3 +51,7 @@ Let the stroke width of the center circle be `2c` and the others, `2s`.
 ![](assets/alg.svg)
 
 ![](assets/ys.svg)
+
+# Implementation
+> the code where these maths are implemented is in [`stores.ts`](../src/stores.ts)
+
