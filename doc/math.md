@@ -1,54 +1,52 @@
 # A Geometrical Approach
-> for light theme version, see [here](math-light.md)
-
-![](assets/dark/o.svg)
+![](assets/o.svg)
 
 Consider this figure. We need to find the coordinates of all points (`A` to `G`, along with others) in terms of `r` (the radius of circle `O`). To make the process easier, let's assume the center of the circle (point `O`) is at `(0,0)`
 
 <details>
     <summary>tl;dr spoiler</summary>
 
-![](assets/dark/vars.svg)
+![](assets/vars.svg)
 </details>
 
 ## A and B
-![](assets/dark/ab.svg)
+![](assets/ab.svg)
 
 ## C and D
-![](assets/dark/BOC.svg)
+![](assets/BOC.svg)
 
-![](assets/dark/cd.svg)
+![](assets/cd.svg)
 
 ## E
-![](assets/dark/AOM.svg)
+![](assets/AOM.svg)
 
-![](assets/dark/e.svg)
+![](assets/e.svg)
 
 (we also need to find `|AE|` for point [`F`](#f))
 
-![](assets/dark/ae.svg)
+![](assets/ae.svg)
 
 ## F
-![](assets/dark/AOF.svg)
+![](assets/AOF.svg)
 
-![](assets/dark/f.svg)
+![](assets/f.svg)
 
-- The reason why ![](assets/dark/triv.svg) is trivial and left as an exercise to the reader.
+- The reason why ![](assets/triv.svg) is trivial and left as an exercise to the reader.
     <details><summary>spoiler</summary>
 
-    ![](assets/dark/trivial.svg)
+    ![](assets/trivial.svg)
     </details>
 
 ## G
-![](assets/dark/POG.svg)
+![](assets/POG.svg)
 
-![](assets/dark/g.svg)
+![](assets/g.svg)
 
 # An Algebraic Approach
 This is a zoomed-in view of the arc `FG`. Because we are considering the stroke widths, we need to find the 4 intersections (`y1` to `y4`) of the 4 graphs using algebra.
 Let the stroke width of the center circle be `2c` and the others, `2s`. 
 
-![](assets/dark/hl.png)
+![](assets/hl.png)
 
-![](assets/dark/alg.svg)
-![](assets/dark/ys.svg)
+![](assets/alg.svg)
+![](assets/ys.svg)
