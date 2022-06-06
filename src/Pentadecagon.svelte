@@ -1,22 +1,37 @@
 <script lang="ts">
-    import { blur, draw } from 'svelte/transition';
-    import { linear } from 'svelte/easing';
+	import { blur, draw } from 'svelte/transition';
+	import { linear } from 'svelte/easing';
 
-    import { option, coords, fifteenth } from './stores';
-    import type { Transition } from './Interfaces';
+	import { option, coords, fifteenth } from './stores';
+	import type { Transition } from './Interfaces';
 
-    export let math: boolean;
-    export let transition: Transition;
+	export let math: boolean;
+	export let transition: Transition;
 
-    // disable animation if math
-    const drw = math ? () => {} : (node, { delay, duration }) => draw(node, { delay, duration, easing: linear });
+	// disable animation if math
+	const drw = math ? () => {
+	} : (node, { delay, duration }) => draw(node, {
+		delay,
+		duration,
+		easing: linear
+	});
 
-    let r, size, r2, o, swidth, cwidth, stroke, accent, background;
-    $:(() => ({ r, size, r2, o, swidth, cwidth, stroke, accent, background } = $option))();
+	let r, size, r2, o, swidth, cwidth, stroke, accent, background;
+	$:(() => ({
+		r,
+		size,
+		r2,
+		o,
+		swidth,
+		cwidth,
+		stroke,
+		accent,
+		background
+	} = $option))();
 
-    // set all stroke widths to 1 if math
-    $: sw = math ? 1 : swidth;
-    $: cw = math ? 1 : cwidth;
+	// set all stroke widths to 1 if math
+	$: sw = math ? 1 : swidth;
+	$: cw = math ? 1 : cwidth;
 </script>
 
 <svg width={size} height={size} stroke-width={sw} {stroke}
@@ -60,8 +75,7 @@
     {/if}
 </svg>
 
-<style>
-    svg{
-        fill: none;
-    }
+<style lang="sass">
+    svg
+        fill: none
 </style>
