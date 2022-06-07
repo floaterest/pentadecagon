@@ -1,27 +1,21 @@
 <script lang="ts">
-    import Pentadecagon from './Pentadecagon.svelte';
+	import Pentadecagon from './Pentadecagon.svelte';
 
-    import { option, createOption } from './stores';
-    import { transitions, init } from './constants';
-    import type { Transition } from './Interfaces';
+	import { option, createOption } from './stores';
+	import { transition, init } from './constants';
+	import type { Transition } from './Interfaces';
 
-    let visible = true;
-    let transition = transitions[0];
+	let visible = true;
 
-    function rerender(){
-        visible = false;
-        setTimeout(() => {
-            visible = true;
-        }, 1);
-    }
+	function rerender(){
+		visible = false;
+		setTimeout(() => {
+			visible = true;
+		}, 1);
+	}
 
-    function chtr(tr: Transition){
-        transition = tr;
-        rerender();
-    }
-
-    let opt = { ...init };
-    $: option.set(createOption(opt));
+	let opt = { ...init };
+	$: option.set(createOption(opt));
 </script>
 
 <main>
@@ -34,9 +28,7 @@
         <input type="text" bind:value={opt.background}>
     </div>
     <div>
-        {#each transitions as tr,i}
-            <button on:click={()=>chtr(tr)}>{i}</button>
-        {/each}
+        <button on:click={rerender}>animate</button>
     </div>
     {#if visible}
         <Pentadecagon {transition}/>
