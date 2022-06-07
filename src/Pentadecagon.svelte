@@ -5,12 +5,10 @@
 	import { option, coords, fifteenth } from './stores';
 	import type { Transition } from './Interfaces';
 
-	export let math: boolean;
 	export let transition: Transition;
 
 	// disable animation if math
-	const drw = math ? () => {
-	} : (node, { delay, duration }) => draw(node, {
+	const drw = (node, { delay, duration }) => draw(node, {
 		delay,
 		duration,
 		easing: linear
@@ -28,17 +26,13 @@
 		accent,
 		background
 	} = $option))();
-
-	// set all stroke widths to 1 if math
-	$: sw = math ? 1 : swidth;
-	$: cw = math ? 1 : cwidth;
 </script>
 
-<svg width={size} height={size} stroke-width={sw} {stroke}
+<svg width={size} height={size} stroke-width={swidth} {stroke}
      style="background-color:{background};">
     <!-- outer circle -->
     <path d="M{o} {$coords.ay} A{r} {r} 0 0 1 {o} {$coords.bx} A{r} {r} 0 1 1 {o} {$coords.ay}"
-          stroke-width={cw} in:drw="{transition.circle}"></path>
+          stroke-width={cwidth} in:drw="{transition.circle}"></path>
     <!-- x axis -->
     <line x1={$coords.bx} y1={o} x2={$coords.ay} y2={o}
           in:drw="{transition.xaxis}"></line>
@@ -64,15 +58,12 @@
     <path d="M{$coords.nx} {$coords.ey} A{$coords.AF} {$coords.AF} 0 0 1 {$coords.fx} {$coords.fy}"
           in:drw="{transition.efa}"></path>
 
-    {#if !math}
-        <!-- FG arc (accent) -->
-        <path d="M{$fifteenth.x1} {$fifteenth.y1}
-                 A{$fifteenth.r1} {$fifteenth.r1} 0 0 1 {$fifteenth.x2} {$fifteenth.y2}
-                 A{$fifteenth.r2} {$fifteenth.r2} 0 0 0 {$fifteenth.x3} {$fifteenth.y3}
-                 A{$fifteenth.r3} {$fifteenth.r3} 0 0 0 {$fifteenth.x4} {$fifteenth.y4}
-                 A{$fifteenth.r4} {$fifteenth.r4} 0 0 1 {$fifteenth.x1} {$fifteenth.y1}"
-              fill={accent} stroke-width="0" in:blur={transition.fga}></path>
-    {/if}
+    <path d="M{$fifteenth.x1} {$fifteenth.y1}
+             A{$fifteenth.r1} {$fifteenth.r1} 0 0 1 {$fifteenth.x2} {$fifteenth.y2}
+             A{$fifteenth.r2} {$fifteenth.r2} 0 0 0 {$fifteenth.x3} {$fifteenth.y3}
+             A{$fifteenth.r3} {$fifteenth.r3} 0 0 0 {$fifteenth.x4} {$fifteenth.y4}
+             A{$fifteenth.r4} {$fifteenth.r4} 0 0 1 {$fifteenth.x1} {$fifteenth.y1}"
+          fill={accent} stroke-width="0" in:blur={transition.fga}></path>
 </svg>
 
 <style lang="sass">
