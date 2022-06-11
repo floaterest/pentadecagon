@@ -1,55 +1,36 @@
 <script lang="ts">
-    import Pentadecagon from './Pentadecagon.svelte';
-    import Annotations from './Annotations.svelte';
+	import Pentadecagon from './Pentadecagon.svelte';
 
-    import { option, createOption } from './stores';
-    import { transitions, init } from './constants';
-    import type { Transition } from './Interfaces';
+	import { option, createOption } from './stores';
+	import { transition, init } from './constants';
+	import type { Transition } from './Interfaces';
 
-    let math = false;
-    let visible = true;
-    let transition = transitions[0];
+	let visible = true;
 
-    function rerender(){
-        visible = false;
-        setTimeout(() => {
-            visible = true;
-        }, 1);
-    }
+	function rerender(){
+		visible = false;
+		setTimeout(() => {
+			visible = true;
+		}, 1);
+	}
 
-    function chtr(tr: Transition){
-        transition = tr;
-        rerender();
-    }
-
-    let opt = { ...init };
-    $: option.set(createOption(opt));
+	let opt = { ...init };
+	$: option.set(createOption(opt));
 </script>
 
 <main>
     <div>
         <input type="number" bind:value={opt.r}>
-        <input type="number" bind:value={opt.swidth} disabled={math?"disabled":""}>
-        <input type="number" bind:value={opt.cwidth} disabled={math?"disabled":""}>
+        <input type="number" bind:value={opt.swidth}>
+        <input type="number" bind:value={opt.cwidth}>
         <input type="text" bind:value={opt.stroke}>
         <input type="text" bind:value={opt.accent}>
         <input type="text" bind:value={opt.background}>
-        <input type="checkbox" on:click={rerender} bind:checked={math}>
     </div>
     <div>
-        {#each transitions as tr,i}
-            <button on:click={()=>chtr(tr)} disabled={math?"disabled":""}>{i}</button>
-        {/each}
+        <button on:click={rerender}>animate</button>
     </div>
     {#if visible}
-        <Pentadecagon {math} {transition}/>
-        {#if math}
-            <Annotations/>
-            <style>
-                svg{
-                    position: absolute;
-                }
-            </style>
-        {/if}
+        <Pentadecagon {transition}/>
     {/if}
 </main>
